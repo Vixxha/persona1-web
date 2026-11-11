@@ -1,5 +1,7 @@
 # Persona 1 Web
 
+Juega en: https://persona1-web-vixxha.leanflour3.chatgpt.site
+
 Versión para navegador de Persona: Project Philemon, con WebAssembly y WebGPU.
 
 ## Ejecutar en tu equipo
