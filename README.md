@@ -1,6 +1,6 @@
 # Persona 1 Web
 
-**[Jugar en el navegador](https://persona1-web-vixxha.leanflour3.chatgpt.site)** ? [Version descargable](https://github.com/Vixxha/persona1-web/releases/tag/web-v1)
+**[Jugar en el navegador](https://persona1-web-vixxha.leanflour3.chatgpt.site)**
 
 Port para navegador con WebAssembly y WebGPU, basado en Persona: Project Philemon. Consulta [las instrucciones de la version web](persona1/web/README.md).
 

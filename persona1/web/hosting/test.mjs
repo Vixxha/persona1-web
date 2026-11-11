@@ -11,19 +11,23 @@ assert.ok((await r.text()).includes('id="start"'));
 r=await worker.fetch(req('/favicon.png'));
 const hash=b=>createHash('sha256').update(b).digest('hex');
 assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(fs.readFileSync('public/favicon.png')));
-assert.equal((await worker.fetch(req('/../secret'))).status,404);
-assert.equal((await worker.fetch(req('/Persona.iso',{method:'POST'}))).status,405);
+const env={PERSONA_UPLOAD_SECRET:'even-an-old-secret-cannot-enable-writes',BUCKET:{
+ async get(name,options){
+  assert.equal(name,'Persona.iso');assert.equal(options.range.get('Range'),'bytes=0-2');
+  return {body:new ReadableStream({start(c){c.enqueue(new Uint8Array([1,2,3]));c.close()}}),size:820740096,range:{offset:0,length:3},httpEtag:'"test"'};
+ },
+ async head(){return{size:820740096,range:{offset:0,length:820740096},httpEtag:'"test"'}},
+}};
+assert.equal((await worker.fetch(req('/../secret'),env)).status,404);
+assert.equal((await worker.fetch(req('/Persona.iso',{method:'POST'}),env)).status,405);
+assert.equal((await worker.fetch(req('/_upload/Persona.iso',{method:'POST'}),env)).status,405);
+assert.equal((await worker.fetch(req('/_upload/Persona.iso'),env)).status,404);
 const originalFetch=globalThis.fetch;
-let fetched;
-globalThis.fetch=async(url,options)=>{
- fetched={url,options};
- return new Response(new Uint8Array([1,2,3]),{status:206,headers:{'Content-Range':'bytes 0-2/820740096','Content-Length':'3'}});
-};
-r=await worker.fetch(req('/Persona.iso',{headers:{Range:'bytes=0-2'}}));
-assert.equal(r.status,206);
-assert.equal(r.headers.get('Content-Range'),'bytes 0-2/820740096');
-assert.equal(fetched.options.headers.get('Range'),'bytes=0-2');
-assert.equal(fetched.url,'https://github.com/Vixxha/persona1-web/releases/download/web-v1/Persona.iso');
+globalThis.fetch=()=>{throw Error('Runtime must not depend on another host')};
+r=await worker.fetch(req('/Persona.iso',{headers:{Range:'bytes=0-2'}}),env);
+assert.equal(r.status,206);assert.equal(r.headers.get('Content-Range'),'bytes 0-2/820740096');
 assert.deepEqual([...new Uint8Array(await r.arrayBuffer())],[1,2,3]);
+r=await worker.fetch(req('/Persona.iso',{method:'HEAD'}),env);
+assert.equal(r.status,200);assert.equal(r.headers.get('Content-Length'),'820740096');assert.equal((await r.arrayBuffer()).byteLength,0);
 globalThis.fetch=originalFetch;
-console.log('PASS: frontend, favicon, isolation headers, access paths and streamed runtime ranges.');
+console.log('PASS: independent storage, no outbound fetches, ranged reads, HEAD and no public writes.');
