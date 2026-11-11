@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Persona 1</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="theme.css">
+<body>
+<main>
+<header class="hero"><div><p class="eyebrow">Shin Megami Tensei</p><h1>PERSONA<span>1</span></h1></div>
+<button id="start" type="button">Iniciar juego</button></header>
+<div class="session-status">
+<p id="status" role="status">Pulsa Iniciar para jugar.</p>
+<p id="save-status" role="status"></p>
+</div>
+<section id="player" aria-label="Reproductor de Persona">
+<div id="player-tools">
+<p id="controller-status" role="status">Conecta un mando y pulsa uno de sus botones.</p>
+<button id="states" type="button" aria-haspopup="dialog">Estados</button>
+<button id="controls" type="button" aria-haspopup="dialog">Controles</button>
+<button id="fullscreen" type="button" aria-controls="player" aria-pressed="false">Pantalla completa</button>
+</div>
+<canvas width="960" height="544" tabindex="0" aria-label="Pantalla de Persona"></canvas>
+<dialog id="controls-dialog" aria-labelledby="controls-title">
+<header><h2 id="controls-title">Controles</h2><button id="close-controls" type="button" aria-label="Cerrar controles">Cerrar</button></header>
+<label>Mando activo<select id="controller-select"><option value="auto">Automático</option></select></label>
+<label>Iconos dentro del juego<select id="icon-style">
+<option value="auto">Automático según el dispositivo</option>
+<option value="playstation">PlayStation</option><option value="xbox">Xbox</option><option value="switch">Nintendo Switch</option>
+</select></label>
+<p>Selecciona una asignación y pulsa la tecla, el botón o la dirección del stick que quieras usar.</p>
+<p id="controls-notice" role="status" aria-live="polite"></p>
+<table><thead><tr><th scope="col">Acción de PSP</th><th scope="col">Teclado</th><th scope="col">Mando</th></tr></thead><tbody id="bindings"></tbody></table>
+<footer><button id="clear-binding" type="button">Quitar asignación elegida</button><button id="reset-controls" type="button">Restablecer controles</button></footer>
+<p>Iconos de WarDrimmer, ryuubu y Karasu. <a href="https://gamebanana.com/mods/373811" target="_blank" rel="noopener noreferrer">Mod original</a></p>
+</dialog>
+<dialog id="states-dialog" aria-labelledby="states-title">
+<header><h2 id="states-title">Estados de partida</h2><button id="close-states" type="button">Cerrar</button></header>
+<p>Guarda el punto actual del juego o carga una de tus tres ranuras. Al guardar en una ranura ocupada se reemplaza su estado.</p>
+<p id="state-notice" role="status" aria-live="polite">Preparando las ranuras...</p>
+<table><thead><tr><th>Ranura</th><th>Fecha</th><th>Guardar</th><th>Cargar</th></tr></thead><tbody id="state-slots"></tbody></table>
+</dialog>
+</section>
+<p class="page-note">Tu viaje comienza en Mikage-cho.</p>
+</main>
+<script type="module" src="player.mjs"></script>
+</body>
+</html>

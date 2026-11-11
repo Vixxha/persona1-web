@@ -1,0 +1,62 @@
+{
+  "families": {
+    "playstation": {
+      "UI/Controls.png": {
+        "asset": "prompts-playstation-Controls.rgba",
+        "width": 640,
+        "height": 80
+      },
+      "UI/Controls2.png": {
+        "asset": "prompts-playstation-Controls2.rgba",
+        "width": 640,
+        "height": 80
+      },
+      "Casino/LR.png": {
+        "asset": "prompts-playstation-LR.rgba",
+        "width": 320,
+        "height": 80
+      }
+    },
+    "xbox": {
+      "UI/Controls.png": {
+        "asset": "prompts-xbox-Controls.rgba",
+        "width": 640,
+        "height": 80
+      },
+      "UI/Controls2.png": {
+        "asset": "prompts-xbox-Controls2.rgba",
+        "width": 640,
+        "height": 80
+      },
+      "Casino/LR.png": {
+        "asset": "prompts-xbox-LR.rgba",
+        "width": 320,
+        "height": 80
+      }
+    },
+    "switch": {
+      "UI/Controls.png": {
+        "asset": "prompts-switch-Controls.rgba",
+        "width": 640,
+        "height": 80
+      },
+      "UI/Controls2.png": {
+        "asset": "prompts-switch-Controls2.rgba",
+        "width": 640,
+        "height": 80
+      },
+      "Casino/LR.png": {
+        "asset": "prompts-switch-LR.rgba",
+        "width": 320,
+        "height": 80
+      }
+    }
+  },
+  "source": "https://gamebanana.com/mods/373811",
+  "authors": [
+    "WarDrimmer",
+    "ryuubu",
+    "Karasu"
+  ],
+  "ini": "[hashes]\n00000000d656af1f05b51e4b = UI/Controls.png\n000000001e27aa68dd8920a4 = UI/Controls2.png\n000000008fb3ef94afd8fe92 = Casino/LR.png\n0000000012bedd46e998b524 = Casino/LR.png\n"
+}
